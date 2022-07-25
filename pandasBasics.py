@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import LabelEncoder
 
 data=pd.read_excel('test_data.xlsx')
 print(data.head)
@@ -17,8 +18,16 @@ print(imputed_data)
 
 data=pd.read_csv('iris.csv')
 print(data.head())
+
 data.columns=['sepal length','sepal width','petal length','petal width','class']
 print(data.head())
 
-np.unique(data['class']map(mapping))
+print(np.unique(data['class']))
+
+mapping={'Iris-setosa':0,'Iris-versicolor':1,'Iris-virginica':2}
+data['class']=data['class'].map(mapping)
+print(data.head())
+
+le=LabelEncoder()
+data['class']=le.fit_transform(data['class'])
 print(data.head())
