@@ -3,6 +3,7 @@ from sklearn.datasets import load_iris
 import pandas as pd
 from sklearn.cluster import KMeans
 from matplotlib import pyplot as plt
+from sklearn.metrics.cluster import silhouette_score
 
 warnings.filterwarnings("ignore")
 iris=load_iris()
@@ -20,11 +21,10 @@ plt.xlabel(iris.feature_names[0])
 plt.ylabel(iris.feature_names[1])
 plt.show()
 
-from sklearn.metrics.cluster import silhouette_score
 print(silhouette_score(data,model.labels_))
 
 score = []
-k_range = (2,50)
+k_range = range(2,50)
 for k in k_range:
     model=KMeans(n_clusters=k,init="random",algorithm="full")
     model.fit(data)
